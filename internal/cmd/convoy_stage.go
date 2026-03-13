@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -639,12 +640,12 @@ func createStagedConvoy(dag *ConvoyDAG, waves []Wave, status string, title strin
 	}
 
 	// Ensure custom types (including 'convoy') are registered in town beads.
-	if err := beads.EnsureCustomTypes(townBeads); err != nil {
+	if err := beads.EnsureCustomTypes(filepath.Join(townBeads, ".beads")); err != nil {
 		return "", fmt.Errorf("ensuring custom types: %w", err)
 	}
 
 	// Ensure custom statuses (staged_ready, staged_warnings) are registered.
-	if err := beads.EnsureCustomStatuses(townBeads); err != nil {
+	if err := beads.EnsureCustomStatuses(filepath.Join(townBeads, ".beads")); err != nil {
 		return "", fmt.Errorf("ensuring custom statuses: %w", err)
 	}
 
