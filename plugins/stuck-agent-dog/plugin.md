@@ -59,11 +59,11 @@ Gather all polecats and the deacon session. We check both crashed sessions
 echo "=== Stuck Agent Dog: Checking agent health ==="
 
 TOWN_ROOT="$HOME/gt"
-RIGS_JSON_PATH="${TOWN_ROOT}/mayor/rigs.json"
+RIGS_JSON_PATH="${TOWN_ROOT}/rigs.json"
 
-# Fallback for older/runtime-copied layouts that still expose rigs.json at town root.
-if [ ! -f "$RIGS_JSON_PATH" ] && [ -f "$TOWN_ROOT/rigs.json" ]; then
-  RIGS_JSON_PATH="$TOWN_ROOT/rigs.json"
+# Fallback for older/runtime-copied layouts that still expose rigs.json under mayor/.
+if [ ! -f "$RIGS_JSON_PATH" ] && [ -f "$TOWN_ROOT/mayor/rigs.json" ]; then
+  RIGS_JSON_PATH="$TOWN_ROOT/mayor/rigs.json"
 fi
 
 # Read rigs.json for rig names and beads prefixes

@@ -423,6 +423,12 @@ func TestParsePluginMD_StuckAgentDogUsesCanonicalHeartbeatPath(t *testing.T) {
 	if !strings.Contains(plugin.Instructions, "Fallback for older/runtime-copied layouts") {
 		t.Fatalf("expected rigs.json fallback guidance in instructions, got:\n%s", plugin.Instructions)
 	}
+	if !strings.Contains(plugin.Instructions, "RIGS_JSON_PATH=\"${TOWN_ROOT}/rigs.json\"") {
+		t.Fatalf("expected town-root rigs.json as canonical source in instructions, got:\n%s", plugin.Instructions)
+	}
+	if !strings.Contains(plugin.Instructions, "$TOWN_ROOT/mayor/rigs.json") {
+		t.Fatalf("expected mayor/ fallback in instructions, got:\n%s", plugin.Instructions)
+	}
 	if !strings.Contains(plugin.Instructions, "could not parse rigs.json") {
 		t.Fatalf("expected fail-safe rigs.json parse handling in instructions, got:\n%s", plugin.Instructions)
 	}
